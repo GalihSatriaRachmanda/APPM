@@ -55,8 +55,36 @@ class PengaduanController extends Controller
         $pengaduan = pengaduan::all();
         return Datatables::of($pengaduan)
             ->addColumn('periksa', function ($v) {
-                return '<a href= "pengaduan/'.$v->id.'\"class="btn btn-info btn-small btn-circle text-white">See more</a> ';
+                return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
             })
             ->rawColumns(['periksa'])->make(true);
     }
+    public function datatables_none()
+    {
+        $pengaduan = pengaduan::where('status' , '0');
+        return Datatables::of($pengaduan)
+            ->addColumn('periksa', function ($v) {
+                return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
+            })
+            ->rawColumns(['periksa'])->make(true);
+    }
+    public function datatables_proses()
+    {
+        $pengaduan = pengaduan::where('status' , 'proses');
+        return Datatables::of($pengaduan)
+            ->addColumn('periksa', function ($v) {
+                return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
+            })
+            ->rawColumns(['periksa'])->make(true);
+    }
+    public function datatables_selesai()
+    {
+        $pengaduan = pengaduan::where('status' , 'selesai');
+        return Datatables::of($pengaduan)
+            ->addColumn('periksa', function ($v) {
+                return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
+            })
+            ->rawColumns(['periksa'])->make(true);
+    }
+    
 }

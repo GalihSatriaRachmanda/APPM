@@ -45,6 +45,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth','verified']], fun
 
 	Route::group(['middleware' => ['role:petugas|admin']], function () {
 
+		Route::get('datatables/laporan/none', 'App\Http\Controllers\PengaduanController@datatables_none')->name('laporan.datatables.none');
+		Route::get('datatables/laporan/selesai', 'App\Http\Controllers\PengaduanController@datatables_selesai')->name('laporan.datatables.selesai');
+		Route::get('datatables/laporan/proses', 'App\Http\Controllers\PengaduanController@datatables_proses')->name('laporan.datatables.proses');
         Route::resource('tanggapan', 'App\Http\Controllers\TanggapanController');
 	
 	});

@@ -29,9 +29,6 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            @hasanyrole('admin|petugas')
-                @include('layouts.navbars.sidebar')
-            @endhasanyrole
         @endauth
         
         <div class="main-content">
