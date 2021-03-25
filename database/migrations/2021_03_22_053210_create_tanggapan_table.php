@@ -17,10 +17,10 @@ class CreateTanggapanTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pengaduan')->index();
             $table->text('tanggapan');
-            $table->unsignedBigInteger('id_petugas')->index();
+            $table->unsignedBigInteger('id_user')->index();
             $table->timestamp('tgl_tanggapan');
 
-            $table->foreign('id_petugas')->references('id')->on('users')
+            $table->foreign('id_user')->references('id')->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->foreign('id_pengaduan')->references('id')->on('pengaduan')

@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="card-body px-lg-5 py-lg-5">
-                        <form role="form" enctype="multipart/form-data" method="POST" data-toggle="validator" action="{{ route('pengaduan') }}">
+                        <form role="form" enctype="multipart/form-data" method="POST" data-toggle="validator" action="{{ route('pengaduan.store') }}">
                         {{ csrf_field() }} {{ method_field('POST') }}
                         
                         @auth()
@@ -77,4 +77,52 @@
 @push('js')
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#modal-form form').validator().on('submit', function (e) {
+            if (!e.isDefaultPrevented()){
+                var id = $('#id').val();
+                if (save_method == 'add') url = "{{ url('dashboard/area') }}";
+                else url = "{{ url('dashboard/area') . '/' }}" + id;
+
+                $.ajax({
+                    url : url,
+                    type : "POST",
+                    //hanya untuk input data tanpa dokumen
+//                      data : $('#modal-form form').serialize(),
+                    data: new FormData($("#modal-form form")[0]),
+                    contentType: false,
+                    processData: false,
+                    success : function(data) {
+                        console.log(data)
+                        $('#modal-form').modal('hide');
+                        table.ajax.reload();
+                        swal({
+                            title: 'Success!',
+                            text: data.message,
+                            type: 'success',
+                            timer: '1500'
+                        })
+                    },
+                    error : function(data){
+                        console.log(data)
+                        var response = JSON.parse(data.responseText);
+                        let str = ''
+                        $.each(response.errors, function(key, value) {
+                            str += value + ', ';
+                        });
+                        swal({
+                            title: 'Oops...',
+                            text: str,
+                            type: 'error',
+                            timer: '3000'
+                        })
+                    }
+                });
+                return false;
+            }
+        });
+    } );
+    </script>
 @endpush

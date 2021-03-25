@@ -21,9 +21,12 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth','verified']], function () {
 	Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-	
-	Route::post('pengaduan', 'App\Http\Controllers\PengaduanController@store')->name('pengaduan');
-	Route::get('users-tanggapan', 'App\Http\Controllers\PengaduanController@index')->name('tanggapan');
+	Route::get('laporan', 'App\Http\Controllers\PengaduanController@index')->name('pengaduan');
+
+	Route::resource('lapor', 'App\Http\Controllers\PengaduanController');
+	Route::post('store', 'App\Http\Controllers\PengaduanController@store')->name('pengaduan.store');
+	Route::get('datatables/laporan', 'App\Http\Controllers\PengaduanController@datatables')->name('laporan.datatables');
+	Route::get('pengaduan/{id}', 'App\Http\Controllers\PengaduanController@show')->name('show.Pengaduan');
 
 	Route::get('profile','App\Http\Controllers\ProfileController@edit')->name('profile.edit');
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -39,6 +42,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth','verified']], fun
         Route::resource('roles', 'App\Http\Controllers\RoleController');
         Route::get('datatables/roles', 'App\Http\Controllers\RoleController@datatables')->name('roles.datatables');
     });
+
+	Route::group(['middleware' => ['role:petugas|admin']], function () {
+
+        Route::resource('tanggapan', 'App\Http\Controllers\TanggapanController');
+	
+	});
+
 });
 
 Auth::routes(['verify' => true]);

@@ -93,7 +93,7 @@
 <script src="{{asset('assets')}}/vendor/sweet-alert/sweetalert.min.js" ></script>
 <!-- Select2 -->
 <script src="{{ asset('assets') }}/vendor/select2/select2.full.min.js"></script>
-{{-- Validator --}}
+<!-- Validator -->
 <script src="{{ asset('assets') }}/vendor/validator/validator.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -451,7 +451,7 @@
                 $.each(roles, (k,v)=>{
                     str += `<div class="col-md-6 col-12">
                                 <div class="form-check">
-                                    <input type="checkbox" class="cb_role form-check-input" id="${v.id}" value="${v.name}">
+                                    <input type="radio" for="roles" name="roles" class="cb_role form-check-input" id="${v.id}" value="${v.name}">
                                     <label class="form-check-label" for="${v.id}">${v.name}</label>
                                 </div>
                             </div>`

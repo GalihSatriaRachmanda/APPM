@@ -16,9 +16,13 @@ class PengaduanController extends Controller
     
     public function index()
     {
-        $pekerjaan = Pekerjaan::whereNotIn('id', Lamaran::where('user_id', Auth::user()->id)->id );
-        $cabang = Cabang::all();
-        return view('dashboard.lamaran.index', [ 'pekerjaan' => $pekerjaan, 'cabang' => $cabang]);
+        return view('pengaduan.index');
+    }
+
+    public function show($id)
+    {
+        $pengaduan = Pengaduan::where('id', $id)->first();
+        return view('pengaduan.show', ['pengaduan' => $pengaduan]);
     }
     
     public function store(Request $request)
@@ -44,5 +48,15 @@ class PengaduanController extends Controller
         ]);
 
         return redirect()->back()->with('message', 'Berhasil dilaporkan !');;
+    }
+
+    public function datatables()
+    {
+        $pengaduan = pengaduan::all();
+        return Datatables::of($pengaduan)
+            ->addColumn('periksa', function ($v) {
+                return '<a href= "pengaduan/'.$v->id.'\"class="btn btn-info btn-small btn-circle text-white">See more</a> ';
+            })
+            ->rawColumns(['periksa'])->make(true);
     }
 }
