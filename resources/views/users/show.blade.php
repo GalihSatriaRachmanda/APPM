@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => __('User Profile')])
+@extends('layouts.app',['class' => 'bg-default'], ['title' => __('User Profile')])
 
 @section('content')
 <div class="header bg-gradient-primary py-7 py-lg-8">
 </div>
     <div class="container-fluid mt--9">
-        <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
+        <div class="row justify-content-md-center">
+            <div class="col-xl-11 mb-5 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
@@ -13,67 +13,30 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="default-tab">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-users-tab" data-toggle="tab" href="#nav-users"
-                                        role="tab" aria-controls="nav-users" aria-selected="true">Users</a>
-                                    <a class="nav-item nav-link" id="nav-roles-tab" data-toggle="tab" href="#nav-roles"
-                                        role="tab" aria-controls="nav-roles" aria-selected="false">Roles</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content pl-3 pt-4" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-users" role="tabpanel"aria-labelledby="nav-users-tab">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <span></span>
-                                        <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshUsersTable()" type="button"
-                                                class="btn btn-outline-primary btn-sm" title="Refresh data"><i
-                                                    class="fa fa-refresh"></i> Refresh</button>
-                                            <button onclick="addUser()" type="button" class="btn btn-outline-primary btn-sm"
-                                                title="Add data"><i class="fa fa-plus"></i> Add</button>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table id="users-table" class="table align-items-center">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>NIK</th>
-                                                    <th>Nama</th>
-                                                    <th>Email</th>
-                                                    <th>Nomor Telepon</th>
-                                                    <th>Role</th>
-                                                    <th>Option</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-roles" role="tabpanel" aria-labelledby="nav-roles-tab">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="btn-group btn-group-md mb-3"></div>
-                                        <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshRolesTable()" type="button"
-                                                class="btn btn-outline-primary btn-sm" title="Refresh data"><i
-                                                    class="fa fa-refresh"></i> Refresh</button>
-                                            <button onclick="addRole()" type="button" class="btn btn-outline-primary btn-sm"
-                                                title="Add data"><i class="fa fa-plus"></i> Add</button>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table id="roles-table" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Option</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span></span>
+                            <div class="btn-group btn-group-md mb-3">
+                                <button onclick="refreshUsersTable()" type="button"
+                                    class="btn btn-outline-primary btn-sm" title="Refresh data"><i
+                                        class="fa fa-refresh"></i> Refresh</button>
+                                <button onclick="addUser()" type="button" class="btn btn-outline-primary btn-sm"
+                                    title="Add data"><i class="fa fa-plus"></i> Add</button>
                             </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="users-table" class="table align-items-center">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>NIK</th>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Nomor Telepon</th>
+                                        <th>Role</th>
+                                        <th>Option</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -122,6 +85,12 @@
             processing: true,
             serverSide: true,
             responsive: true,
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": "<", 
+                    "sNext": ">", 
+                }
+                },
             ajax: "{{ route('users.datatables') }}",
             columns: [
                 {data: 'id', name: 'id'},
@@ -201,63 +170,7 @@
             }
         });
 
-        var rolesTable = $('#roles-table').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: "{{ route('roles.datatables') }}",
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
-        });
-
-        $('#modal-form-roles form').validator().on('submit', function (e) {
-            if (!e.isDefaultPrevented()){
-                let id = $('#modal-form-roles #id').val();
-                console.log(save_method )
-                if (save_method == 'add') url = "{{ url('dashboard/roles') }}";
-                else url = "{{ url('dashboard/roles') . '/' }}" + id;
-
-                $.ajax({
-                    url : url,
-                    type : "POST",
-                    //hanya untuk input data tanpa dokumen
-//                      data : $('#modal-form-roles form').serialize(),
-                    data: new FormData($("#modal-form-roles form")[0]),
-                    contentType: false,
-                    processData: false,
-                    success : function(data) {
-                        console.log(data)
-                        $('#modal-form-roles').modal('hide');
-                        $('#roles-table').DataTable().draw(true)
-                        swal({
-                            title: 'Success!',
-                            text: data.message,
-                            type: 'success',
-                            timer: '1500'
-                        })
-                    },
-                    error : function(data){
-                        console.log(data)
-                        let response = JSON.parse(data.responseText);
-                        let str = ''
-                        $.each(response.errors, function(key, value) {
-                            str += value + ', ';
-                        });
-                        swal({
-                            title: 'Oops...',
-                            text: str,
-                            type: 'error',
-                            timer: '3000'
-                        })
-                    }
-                });
-                return false;
-            }
-        });
-
+       
     });
         
     function refreshUsersTable() {
@@ -366,80 +279,6 @@
         });
     }
     
-    function refreshRolesTable() {
-        $('#roles-table').DataTable().draw(true)
-    }
-
-    function addRole() {
-        removeUpload()
-        initRoles()
-        save_method = "add";
-        $('input[name=_method]').val('POST');
-        $('#modal-form-roles').modal('show');
-        $('#modal-form-roles form')[0].reset();
-        $('.modal-title').text('Add Role');
-    }
-
-    function editRole(id) {
-        save_method = 'edit';
-        $('input[name=_method]').val('PATCH');
-        $('#modal-form-roles form')[0].reset();
-        $.ajax({
-            url: "{{ url('dashboard/roles') }}" + '/' + id + "/edit",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                console.log(data)
-                $('#modal-form-roles').modal('show');
-                $('.modal-title').text('Edit Role');
-
-                $('#modal-form-roles #id').val(data.id);
-                $('#modal-form-roles #name').val(data.name);
-            },
-            error : function(err) {
-                console.log(err)
-                alert("Data not found!");
-            }
-        });
-    }
-
-    function deleteRole(id){
-        var csrf_token = $('meta[name="csrf-token"]').attr('content');
-        swal({
-          title: "apakah anda yakin?",
-          text: "setelah dihapus, data tidak bisa dikembalikan!",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                url : "{{ url('dashboard/roles') }}" + '/' + id,
-                type : "POST",
-                data : {'_method' : 'DELETE', '_token' : csrf_token},
-                success : function(data) {
-                    $('#roles-table').DataTable().draw(true);
-                    swal({
-                        title: 'Success!',
-                        text: data.message,
-                        type: 'success',
-                        timer: '1500'
-                    })
-                },
-                error : function (data) {
-                    console.log(data)
-                    swal({
-                        title: 'Oops...',
-                        text: data.message,
-                        type: 'error',
-                        timer: '3000'
-                    })
-                }
-            });
-            }
-        });
-    }
     function initRoles(){
         $.ajax({
             url: "{{ url('dashboard/roles') }}",

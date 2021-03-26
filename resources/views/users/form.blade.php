@@ -73,36 +73,3 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="modal-form-roles" tabindex="-1" role="dialog" aria-labelledby="modal-formLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Header</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <form id="form-item" method="post" class="form-horizontal" data-toggle="validator"
-                enctype="multipart/form-data">
-                {{ csrf_field() }} {{ method_field('POST') }}
-                <input type="hidden" id="id" name="id">
-                <div class="modal-body">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="name">Name <small style="color: red;"> *required</small></label>
-                                <input type="text" class="form-control" id="name" name="name" required autofocus>
-                                <span class="text-danger help-block with-errors"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>

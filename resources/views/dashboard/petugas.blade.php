@@ -1,10 +1,10 @@
 <div class="container-fluid mt--7 ">
         <div class="row justify-content-md-center">
-            <div class="col-xl-9 mb-5 mb-xl-0">
+            <div class="col-xl-11 mb-5 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
-                            <h3 class="mb-0">{{ __('Laporan Belun Ditanggapi') }}</h3>
+                            <h3 class="mb-0">{{ __('Laporan') }}</h3>
                         </div>
                     </div>
                     <div class="card-body bg-secondary">
@@ -24,7 +24,7 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <span></span>
                                         <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshTableNone()" type="button"
+                                            <button onclick="refreshTable()" type="button"
                                             class="btn btn-outline-primary btn-sm" title="Refresh data"><i
                                             class="fa fa-refresh"></i> Refresh</button>
                                         </div>
@@ -34,6 +34,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Judul</th>
+                                                    <th>Nama pengirim</th>
                                                     <th>tanggal laporan</th>
                                                     <th>status</th>
                                                     <th>Option</th>
@@ -46,7 +47,7 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <span></span>
                                         <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshTableNone()" type="button"
+                                            <button onclick="refreshTable()" type="button"
                                             class="btn btn-outline-primary btn-sm" title="Refresh data"><i
                                             class="fa fa-refresh"></i> Refresh</button>
                                         </div>
@@ -56,6 +57,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Judul</th>
+                                                    <th>Nama pengirim</th>
                                                     <th>tanggal laporan</th>
                                                     <th>status</th>
                                                     <th>Option</th>
@@ -68,7 +70,7 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <span></span>
                                         <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshTableSelesai()" type="button"
+                                            <button onclick="refreshTable()" type="button"
                                             class="btn btn-outline-primary btn-sm" title="Refresh data"><i
                                             class="fa fa-refresh"></i> Refresh</button>
                                         </div>
@@ -78,6 +80,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Judul</th>
+                                                    <th>Nama pengirim</th>
                                                     <th>tanggal laporan</th>
                                                     <th>status</th>
                                                     <th>Option</th>

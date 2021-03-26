@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => __('User Profile')])
+@extends('layouts.app',['class' => 'bg-default'],  ['title' => __('User Profile')])
 
 @section('content')
 <div class="header bg-gradient-primary py-7 py-lg-8">
 </div>
-    <div class="container-fluid mt--8 pb-5">
-        <div class="row">
-            <div class="col-xl-12 order-xl-1">
+    <div class="container-fluid mt--9 pb-5">
+        <div class="row justify-content-md-center">
+            <div class="col-xl-11 order-xl-1">
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">

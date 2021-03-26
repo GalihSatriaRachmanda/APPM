@@ -21,7 +21,8 @@ class CreatePengaduanTable extends Migration
             $table->string('lokasi',255);
             $table->text('isi_laporan');
             $table->string('foto',255);
-            $table->enum('status', ['0','invalid','proses', 'selesai'])->default('0');
+            $table->enum('visible', ['anonim','public'])->default('public');
+            $table->enum('status', ['belum di proses','proses', 'selesai'])->default('belum di proses');
 
             $table->foreign('nik')->references('nik')->on('users')
             ->onUpdate('cascade')

@@ -18,11 +18,11 @@ class Tanggapan extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
     
     public function pengaduan()
     {
-        return $this->belongsTo(Pengaduan::class, 'id_pengaduan');
+        return $this->belongsTo(Pengaduan::class, 'id_pengaduan', 'id');
     }
 }

@@ -25,7 +25,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $roleNames = explode("|", $request->role_name);
         $this->validate($request, [
             'nama' => ['required', 'string', 'max:255'],
             'nik'   => ['required', 'string', 'max:16', 'unique:users'],
@@ -42,8 +41,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-
-        $user->syncRoles($roleNames);
+        $user->assignRole('user');
 
         return response()->json([
             'success'    => true,

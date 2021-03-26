@@ -21,10 +21,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth','verified']], function () {
 	Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-	Route::get('laporan', 'App\Http\Controllers\PengaduanController@index')->name('pengaduan');
 
-	Route::resource('lapor', 'App\Http\Controllers\PengaduanController');
-	Route::post('store', 'App\Http\Controllers\PengaduanController@store')->name('pengaduan.store');
 	Route::get('datatables/laporan', 'App\Http\Controllers\PengaduanController@datatables')->name('laporan.datatables');
 	Route::get('pengaduan/{id}', 'App\Http\Controllers\PengaduanController@show')->name('show.Pengaduan');
 
@@ -49,6 +46,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth','verified']], fun
 		Route::get('datatables/laporan/selesai', 'App\Http\Controllers\PengaduanController@datatables_selesai')->name('laporan.datatables.selesai');
 		Route::get('datatables/laporan/proses', 'App\Http\Controllers\PengaduanController@datatables_proses')->name('laporan.datatables.proses');
         Route::resource('tanggapan', 'App\Http\Controllers\TanggapanController');
+	
+	});
+
+	Route::group(['middleware' => ['role:user']], function () {
+
+		Route::post('store', 'App\Http\Controllers\PengaduanController@store')->name('pengaduan.store');
+		Route::get('laporan', 'App\Http\Controllers\PengaduanController@index')->name('pengaduan');
+		Route::get('datatables/laporan/public', 'App\Http\Controllers\PengaduanController@datatables_public')->name('laporan.datatables.public');
+		Route::get('datatables/laporan/private', 'App\Http\Controllers\PengaduanController@datatables_private')->name('laporan.datatables.private');
+
 	
 	});
 

@@ -18,6 +18,7 @@
                         @endauth
 
                             <div class="form-group{{ $errors->has('judul') ? ' has-danger' : '' }}">
+                                <label class="form-label">Judul :</label>
                                 <div class="input-group  mb-3">
                                     <input class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}" placeholder="{{ __('Ketik judul laporan anda*') }}" type="text" name="judul" value="{{ old('judul') }}" required autofocus>
                                 </div>
@@ -28,6 +29,7 @@
                                 @endif
                             </div>
                             <div class="form-group{{ $errors->has('isi_laporan') ? ' has-danger' : '' }}">
+                                <label class="form-label">Isi Laporan :</label>
                                 <div class="input-group  mb-3">
                                     <textarea class="form-control{{ $errors->has('isi_laporan') ? ' is-invalid' : '' }}" style="resize:none" rows="5" placeholder="{{ __('Ketik isi laporan anda*') }}" type="text" name="isi_laporan" value="{{ old('isi_laporan') }}" required autofocus></textarea>
                                 </div>
@@ -38,6 +40,7 @@
                                 @endif
                             </div>
                             <div class="form-group{{ $errors->has('lokasi') ? ' has-danger' : '' }}">
+                                <label class="form-label">Lokasi :</label>
                                 <div class="input-group  mb-3">
                                     <input class="form-control{{ $errors->has('lokasi') ? ' is-invalid' : '' }}" placeholder="{{ __('Ketik lokasi laporan anda*') }}" type="text" name="lokasi" value="{{ old('lokasi') }}" required autofocus>
                                 </div>
@@ -49,8 +52,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-file">
-                                    <input type="file" accept="image/*" class="custom-file-input{{ $errors->has('foto') ? ' is-invalid' : '' }}" name="foto" value="{{ old('foto') }}" required>
-                                    <label class="custom-file-label" for="customFileLang">Select file</label>
+                                    <label class="form-label">Foto Bukti :</label>
+                                    <input type="file" accept="image/*" class="form-control{{ $errors->has('foto') ? ' is-invalid' : '' }}" placeholder="{{ __('Masukan foto bukti*') }}" name="foto" value="{{ old('foto') }}" required>
                                 </div>
                                 @if ($errors->has('foto'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -58,7 +61,15 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="text-center">
+                            <div class="text-left">
+                            <input type="hidden" for="visible" name="visible" id="visible">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" for="visible" name="visible" class="cb_role custom-control-input" id="visible1" value="anonim">
+                                    <label class="custom-control-label" for="visible1">Laporkan sebagai anonim</label>
+                                    <label class="h6 label text-muted ml-2" for="visible1"><span style="color:red;">*</span>Hanya bisa dilihat petugas</label>
+                                </div>
+                            </div>
+                            <div class="text-left">
                                 <button type="submit" class="btn btn-primary mt-4">{{ __('Laporkan') }}</button>
                             </div>
                         </form>

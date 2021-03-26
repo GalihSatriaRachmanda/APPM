@@ -17,10 +17,16 @@ class Pengaduan extends Model
             'isi_laporan',
             'lokasi',
             'foto',
+            'visible',
             'status',
     ];
-    public function user()
+
+    public function users()
     {
-        return $this->belongsTo(User::class, 'nik');
+        return $this->belongsTo(User::class, 'nik', 'nik');
+    }
+    public function tanggapans()
+    {
+        return $this->hasMany(Tanggapan::class, 'id', 'id_pengaduan');
     }
 }

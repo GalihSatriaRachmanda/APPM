@@ -30,9 +30,16 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": "<", 
+                    "sNext": ">", 
+                }
+                },
                 ajax: "{{ route('laporan.datatables.none') }}",
                 columns: [
                     {data: 'judul', name: 'judul'},
+                    {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
                     {data: 'status', name: 'status'},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
@@ -44,9 +51,16 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": "<", 
+                    "sNext": ">", 
+                }
+                },
                 ajax: "{{ route('laporan.datatables.proses') }}",
                 columns: [
                     {data: 'judul', name: 'judul'},
+                    {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
                     {data: 'status', name: 'status'},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
@@ -58,9 +72,16 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": "<", 
+                    "sNext": ">", 
+                }
+                },
                 ajax: "{{ route('laporan.datatables.selesai') }}",
                 columns: [
                     {data: 'judul', name: 'judul'},
+                    {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
                     {data: 'status', name: 'status'},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
@@ -70,7 +91,9 @@
         } );
             
         function refreshTable() {
-            $('#pengaduan-table').DataTable().draw(true)
+            $('#tabel_none').DataTable().draw(true)
+            $('#tabel_proses').DataTable().draw(true)
+            $('#tabel_selesai').DataTable().draw(true)
         }
     </script>
 @endpush
