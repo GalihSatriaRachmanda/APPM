@@ -1,14 +1,16 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.app', ['class' => 'bg-gradient-default'])
 
 @section('content')
-    @include('layouts.headers.welcome')
     @guest()
+        @include('layouts.headers.welcome')
         @include('dashboard.user')
     @endguest
     @hasanyrole('user')
+        @include('layouts.headers.welcome')
         @include('dashboard.user')
     @endhasanyrole
     @hasanyrole('admin|petugas')
+        @include('layouts.headers.cards')
         @include('dashboard.petugas')
     @endhasanyrole
 @endsection
@@ -63,6 +65,7 @@
                     {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
                     {data: 'status', name: 'status'},
+                    {data: 'last_update', name:'last_update'},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
                 ]
             });

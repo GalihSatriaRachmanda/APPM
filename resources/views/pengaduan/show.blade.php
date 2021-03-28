@@ -1,7 +1,7 @@
-@extends('layouts.app', ['class' => 'bg-default'], ['title' => __('User Profile')])
+@extends('layouts.app', ['class' => 'bg-gradient-default'], ['title' => __('User Profile')])
 
 @section('content')
-<div class="header bg-gradient-primary py-7 py-lg-8">
+<div class="header bg-gradient-primary py-7 mb-7 py-lg-6">
     <div class="container">
         <div class="header-body text-center mb-3">
             <div class="row justify-content-center">    
@@ -25,7 +25,7 @@
                             <h3 class="text-default">{{ __('Judul Laporan : ') }}<a class="text text-default ">{{$pengaduan->judul}}</a></h3>
                             <h3 class="text-default">{{ __('Nama Pelapor : ') }}<a class="text text-default ">{{$pengaduan->users->nama}}</a></h3>
                             <h3 class="text-default">{{ __('NIK Pelapor : ') }}<a class="text text-default ">{{$pengaduan->nik}}</a></h3>
-                            <h3 class="text-default">{{ __('Tanggal Laporan : ') }}<a class="text text-default ">{{$pengaduan->tgl_pengaduan}}</a></h3>
+                            <h3 class="text-default">{{ __('Tanggal Laporan : ') }}<a class="text text-default ">{{\Carbon\Carbon::parse($pengaduan->tgl_pengaduan)->isoFormat('D MMMM Y HH:mm')}}</a></h3>
                             <h3 class="text-default">{{ __('Status : ') }}<a class="text text-default ">{{$pengaduan->status}}</a></h3>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                 <h2 class="text-primary">{{ __('Foto :') }}</h2>
                             </div>
                             <div class="row justify-content-center">
-                                <img id="foto" src="{{URL::asset($pengaduan->foto)}}">
+                                <img id="foto" style="object-fit: cover;" src="{{URL::asset($pengaduan->foto)}}">
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,8 @@
                             </div>
                             @if(!empty($tanggapan))
                                 @foreach($tanggapan as $a)
-                                <div class="row justify-content-center">
-                                    <a class="text text-default ">{!!nl2br(str_replace(" ", " &nbsp;", $a->tanggapan))!!}</a>
+                                <div class="row justify-content-left">
+                                    <a class="text text-default "><span class="h4 text text-muted">{{\Carbon\Carbon::parse($a->tgl_tanggapan)->isoFormat('D MMMM Y HH:mm')}}  :  </span>{!!nl2br(str_replace(" ", " &nbsp;", $a->tanggapan))!!}</a>
                                 </div>
                                 @endforeach
                             @else
@@ -74,12 +74,12 @@
                         </div>
                     </div>
                 </div>
+                @hasanyrole('petugas|admin')
+                <div class="row justify-content-center">
+                    <a onclick="tanggapanForm()" class="btn btn-info btn-small btn-circle mt-3 text-white">Tanggapi</a> 
+                </div>
+                @endhasanyrole
             </div>
-            @hasanyrole('petugas|admin')
-            <div class="col-xl-12 mb-4">
-                <button onclick="tanggapanForm()" class="btn btn-info btn-small btn-circle mt-3 text-white">Tanggapi</button> 
-            </div>
-            @endhasanyrole
         </div>
     </div>
     @include('layouts.footers.nav')
@@ -93,7 +93,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <img class="modal-content" id="img01">
+        <img class="modal-content" style="object-fit: cover;" id="img01">
       </div>
     </div>
   </div>

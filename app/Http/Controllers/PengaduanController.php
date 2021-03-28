@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Carbon\Carbon;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\File;
@@ -23,6 +24,7 @@ class PengaduanController extends Controller
     public function show($id)
     {
         $pengaduan = Pengaduan::where('id', $id)->first();
+        Carbon::createFromFormat('Y-m-d H:i:s', $pengaduan->tgl_pengaduan)->isoFormat('D MMMM Y HH:mm');
         $tanggapan = Tanggapan::where('id_pengaduan', $id)->get();
         return view('pengaduan.show', ['pengaduan' => $pengaduan, 'tanggapan' => $tanggapan]);
     }
@@ -41,7 +43,6 @@ class PengaduanController extends Controller
             $data_visible = $request->visible;
         }else{
             $data_visible = 'public';
-
         };
         
         $foto_Name = $request->id.time().'.'.$request->foto->extension();  
@@ -54,7 +55,7 @@ class PengaduanController extends Controller
             'isi_laporan'               => $request->isi_laporan,
             'lokasi'                    => $request->lokasi,
             'foto'                      => 'img/laporan/' . $foto_Name,
-            'visible'                   =>  $data_visible
+            'visible'                   => $data_visible,
         ]);
 
         return redirect()->back()->with('message', 'Berhasil dilaporkan !');;
@@ -67,6 +68,9 @@ class PengaduanController extends Controller
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
             })
+            ->editColumn('tgl_pengaduan', function ($user) {
+                return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
+            })
             ->rawColumns(['periksa'])->make(true);
     }
     public function datatables_none()
@@ -75,6 +79,9 @@ class PengaduanController extends Controller
         return Datatables::of($pengaduan)
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
+            })
+            ->editColumn('tgl_pengaduan', function ($user) {
+                return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
             })
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
@@ -88,6 +95,15 @@ class PengaduanController extends Controller
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
             })
+            ->editColumn('tgl_pengaduan', function ($user) {
+                return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
+            })
+            ->addColumn('last_update', function ($v) {
+                $p = Tanggapan::where('id_pengaduan',$v->id)->orderBy('tgl_tanggapan', 'DESC')->first();
+                $parse = Carbon::parse($p['tgl_tanggapan']);
+                $time = Carbon::createFromFormat('Y-m-d H:i:s',  $parse)->isoFormat('D MMMM Y HH:mm');
+                return $time;
+            })
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
             })
@@ -99,6 +115,9 @@ class PengaduanController extends Controller
         return Datatables::of($pengaduan)
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
+            })
+            ->editColumn('tgl_pengaduan', function ($user) {
+                return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
             })
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
@@ -112,6 +131,9 @@ class PengaduanController extends Controller
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
             })
+            ->editColumn('tgl_pengaduan', function ($user) {
+                return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
+            })
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
             })
@@ -123,6 +145,9 @@ class PengaduanController extends Controller
         return Datatables::of($pengaduan)
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
+            })
+            ->editColumn('tgl_pengaduan', function ($user) {
+                return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
             })
             ->rawColumns(['periksa'])->make(true);
     }

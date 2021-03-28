@@ -34,9 +34,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Judul</th>
-                                                    <th>Nama pengirim</th>
-                                                    <th>tanggal laporan</th>
-                                                    <th>status</th>
+                                                    <th>Nama Pengirim</th>
+                                                    <th>Tanggal Laporan</th>
+                                                    <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
@@ -57,9 +57,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>Judul</th>
-                                                    <th>Nama pengirim</th>
-                                                    <th>tanggal laporan</th>
-                                                    <th>status</th>
+                                                    <th>Nama Pengirim</th>
+                                                    <th>Tanggal Laporan</th>
+                                                    <th>Status</th>
+                                                    <th>Tanggapan Terakhir
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
@@ -80,9 +81,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Judul</th>
-                                                    <th>Nama pengirim</th>
-                                                    <th>tanggal laporan</th>
-                                                    <th>status</th>
+                                                    <th>Nama Pengirim</th>
+                                                    <th>Tanggal Laporan</th>
+                                                    <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>

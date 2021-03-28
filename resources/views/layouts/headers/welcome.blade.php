@@ -1,6 +1,6 @@
 <div class="header bg-gradient-primary py-7 py-lg-7">
     @if(session()->has('message'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show mt--6 " role="alert">
         <span class="alert-icon"><i class="ni ni-like-2"></i></span>
         <span class="alert-text">{{ session()->get('message') }}</span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

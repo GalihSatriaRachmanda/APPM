@@ -1,17 +1,22 @@
-@extends('layouts.app', ['title' => __('User Profile')] , ['class' => 'bg-default'])
+@extends('layouts.app', ['title' => __('User Profile')] , ['class' => 'bg-gradient-default'])
 
 @section('content')
-<div class="header bg-gradient-primary py-7 py-lg-8">
+<div class="header bg-gradient-primary py-7 mb-7 py-lg-6">
+    <div class="container">
+        <div class="header-body text-center mb-3">
+            <div class="row justify-content-center">    
+                <div class="col-lg-12 col-md-6">
+                    <h1 class="text-white">{{ __('List Laporan') }}</h1>
+                    <hr style="width:150px; border: 3px solid white; border-radius: 5px;">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid mt--9 ">
         <div class="row justify-content-md-center">
             <div class="col-xl-11 mb-5 mb-xl-0">
                 <div class="card shadow">
-                    <div class="card-header bg-transparent">
-                        <div class="row align-items-center">
-                            <h3 class="mb-0">{{ __('List Laporan') }}</h3>
-                        </div>
-                    </div>
                     <div class="card-body bg-secondary">
                         <div class="default-tab">
                             <nav>

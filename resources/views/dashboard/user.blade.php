@@ -62,7 +62,6 @@
                                 @endif
                             </div>
                             <div class="text-left">
-                            <input type="hidden" for="visible" name="visible" id="visible">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" for="visible" name="visible" class="cb_role custom-control-input" id="visible1" value="anonim">
                                     <label class="custom-control-label" for="visible1">Laporkan sebagai anonim</label>
@@ -70,7 +69,12 @@
                                 </div>
                             </div>
                             <div class="text-left">
-                                <button type="submit" class="btn btn-primary mt-4">{{ __('Laporkan') }}</button>
+                            @guest
+                            <a type="button" href="{{route('login')}}" class="btn btn-primary mt-4">{{ __('Login Dulu') }}</a>
+                            @endguest
+                            @auth
+                            <button type="submit" class="btn btn-primary mt-4">{{ __('Laporkan') }}</button>
+                            @endauth
                             </div>
                         </form>
                     </div>

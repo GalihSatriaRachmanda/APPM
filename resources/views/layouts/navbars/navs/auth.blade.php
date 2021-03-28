@@ -27,14 +27,14 @@
             <ul class="navbar-nav ml-lg-auto">
                 @hasanyrole('user')
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('pengaduan') }}">
+                    <a class="nav-link" href="{{ route('pengaduan') }}">
                         <span>{{ __('Laporan') }}</a>
                     </a>
                 </li>
                 @endhasanyrole
                 @hasanyrole('admin')
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('users-roles') }}">
+                    <a class="nav-link" href="{{ route('users-roles') }}">
                         <span >{{ __('User dan Role') }}</a>
                     </a>
                 </li>
@@ -61,7 +61,6 @@
                     </div>
                 </li>
             </ul>
-            
         </div>
     </div>
 </nav>
