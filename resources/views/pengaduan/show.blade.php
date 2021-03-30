@@ -26,7 +26,16 @@
                             <h3 class="text-default">{{ __('Nama Pelapor : ') }}<a class="text text-default ">{{$pengaduan->users->nama}}</a></h3>
                             <h3 class="text-default">{{ __('NIK Pelapor : ') }}<a class="text text-default ">{{$pengaduan->nik}}</a></h3>
                             <h3 class="text-default">{{ __('Tanggal Laporan : ') }}<a class="text text-default ">{{\Carbon\Carbon::parse($pengaduan->tgl_pengaduan)->isoFormat('D MMMM Y HH:mm')}}</a></h3>
-                            <h3 class="text-default">{{ __('Status : ') }}<a class="text text-default ">{{$pengaduan->status}}</a></h3>
+                            <h3 class="text-default">{{ __('Status : ') }} 
+                            @if($pengaduan->status == 'belum di proses')
+                            <span class="badge badge-danger">
+                            @elseif($pengaduan->status == 'proses')
+                            <span class="badge badge-warning">
+                            @elseif($pengaduan->status == 'selesai')
+                            <span class="badge badge-success">
+                            @endif
+                            {{$pengaduan->status}}</span>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -76,7 +85,7 @@
                 </div>
                 @hasanyrole('petugas|admin')
                 <div class="row justify-content-center">
-                    <a onclick="tanggapanForm()" class="btn btn-info btn-small btn-circle mt-3 text-white">Tanggapi</a> 
+                    <a onclick="tanggapanForm()" id="btn_tanggapan" class="btn btn-info btn-small btn-circle mt-3 text-white">Tanggapi</a> 
                 </div>
                 @endhasanyrole
             </div>
@@ -114,26 +123,14 @@
 <script src="{{ asset('assets') }}/vendor/validator/validator.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+    
     $('#modal-form-tanggapan form').validator().on('submit', function (e) {
-            if (!e.isDefaultPrevented()){
                 let id = $('#modal-form-tanggapan #id').val();
                 url = "{{ url('dashboard/tanggapan') }}";
-                let rCheckboxes = $('.cb_role')
-                let roleNameArr = ''
-                $.each(rCheckboxes, (k,v)=>{
-                    if(v.checked){
-                        if(roleNameArr == '') roleNameArr += v.value
-                        else roleNameArr += '|' + v.value
-                    }
-                })
-                $('#role_name').val(roleNameArr)
-
+                
                 $.ajax({
                     url : url,
                     type : "POST",
-                    //hanya untuk input data tanpa dokumen
-//                      data : $('#modal-form-tanggapan form').serialize(),
                     data: new FormData($("#modal-form-tanggapan form")[0]),
                     contentType: false,
                     processData: false,
@@ -147,6 +144,7 @@ $(document).ready(function() {
                             type: 'success',
                             timer: '1500'
                         })
+                        location.reload();
                     },
                     error : function(data){
                         console.log(data)
@@ -164,7 +162,6 @@ $(document).ready(function() {
                     }
                 });
                 return false;
-            }
         });
 
     tanggapanForm = function(){

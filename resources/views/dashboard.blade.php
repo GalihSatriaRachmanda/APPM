@@ -1,16 +1,16 @@
-@extends('layouts.app', ['class' => 'bg-gradient-default'])
+@extends('layouts.app', ['class' => 'bg-default'])
 
 @section('content')
     @guest()
         @include('layouts.headers.welcome')
-        @include('dashboard.user')
+        @include('dashboard.guest')
     @endguest
     @hasanyrole('user')
         @include('layouts.headers.welcome')
         @include('dashboard.user')
     @endhasanyrole
     @hasanyrole('admin|petugas')
-        @include('layouts.headers.cards')
+        @include('layouts.headers.admin')
         @include('dashboard.petugas')
     @endhasanyrole
 @endsection
@@ -43,7 +43,10 @@
                     {data: 'judul', name: 'judul'},
                     {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
-                    {data: 'status', name: 'status'},
+                    {data: 'status',  
+                        render: function (data, type, row) {
+                            return  `<span class="badge badge-danger">${row.status}</span> `;
+                    }},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
                 ]
             });
@@ -64,8 +67,11 @@
                     {data: 'judul', name: 'judul'},
                     {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
-                    {data: 'status', name: 'status'},
                     {data: 'last_update', name:'last_update'},
+                    {data: 'status',  
+                        render: function (data, type, row) {
+                            return  `<span class="badge badge-warning">${row.status}</span> `;
+                    }},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
                 ]
             });
@@ -86,7 +92,10 @@
                     {data: 'judul', name: 'judul'},
                     {data: 'nama', name: 'nama'},
                     {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
-                    {data: 'status', name: 'status'},
+                    {data: 'status',  
+                        render: function (data, type, row) {
+                            return  `<span class="badge badge-success">${row.status}</span> `;
+                    }},
                     {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
                 ]
             });

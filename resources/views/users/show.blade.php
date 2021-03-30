@@ -1,4 +1,4 @@
-@extends('layouts.app',['class' => 'bg-gradient-default'], ['title' => __('User Profile')])
+@extends('layouts.app',['class' => 'bg-secondary'], ['title' => __('User Profile')])
 
 @section('content')
 <div class="header bg-gradient-primary py-7 mb-7 py-lg-6">
@@ -295,7 +295,7 @@
                 $.each(roles, (k,v)=>{
                     str += `<div class="col-md-6 col-12">
                                 <div class="form-check">
-                                    <input type="radio" for="roles" name="roles" class="cb_role form-check-input" id="${v.id}" value="${v.name}">
+                                    <input type="radio" for="roles" name="roles" class="cb_role form-check-input" id="${v.id}" value="${v.name}" required>
                                     <label class="form-check-label" for="${v.id}">${v.name}</label>
                                 </div>
                             </div>`

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
@@ -63,7 +63,7 @@ class PengaduanController extends Controller
 
     public function datatables()
     {
-        $pengaduan = pengaduan::all();
+        $pengaduan = Pengaduan::all();
         return Datatables::of($pengaduan)
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';
@@ -75,7 +75,7 @@ class PengaduanController extends Controller
     }
     public function datatables_none()
     {
-        $pengaduan = pengaduan::where('status' , 'belum di proses');
+        $pengaduan = Pengaduan::where('status' , 'belum di proses');
         return Datatables::of($pengaduan)
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
@@ -90,7 +90,7 @@ class PengaduanController extends Controller
     }
     public function datatables_proses()
     {
-        $pengaduan = pengaduan::where('status' , 'proses');
+        $pengaduan = Pengaduan::where('status' , 'proses');
         return Datatables::of($pengaduan)
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
@@ -111,7 +111,7 @@ class PengaduanController extends Controller
     }
     public function datatables_selesai()
     {
-        $pengaduan = pengaduan::where('status' , 'selesai');
+        $pengaduan = Pengaduan::where('status' , 'selesai');
         return Datatables::of($pengaduan)
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
@@ -126,7 +126,7 @@ class PengaduanController extends Controller
     }
     public function datatables_public()
     {
-        $pengaduan = pengaduan::where('visible' , 'public');
+        $pengaduan = Pengaduan::where('visible' , 'public');
         return Datatables::of($pengaduan)
             ->addColumn('nama', function ($v) {
                 return $v->users? $v->users->nama:'-';
@@ -141,7 +141,7 @@ class PengaduanController extends Controller
     }
     public function datatables_private()
     {
-        $pengaduan = pengaduan::where('nik' , Auth::user()->nik);
+        $pengaduan = Pengaduan::where('nik' , Auth::user()->nik);
         return Datatables::of($pengaduan)
             ->addColumn('periksa', function ($v) {
                 return '<a href="/dashboard/pengaduan/' .$v->id.'\" class="btn btn-info btn-small btn-circle text-white">See more</a> ';

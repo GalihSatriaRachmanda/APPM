@@ -13,9 +13,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
-                            @csrf
-                            @method('put')
+                        <form method="post" id="update" autocomplete="off" enctype="multipart/form-data">
+                            {{ csrf_field() }} {{ method_field('POST') }}
 
                             <h6 class="heading-small text-muted mb-4">{{ __('User information') }}</h6>
                             
@@ -28,6 +27,7 @@
                                 </div>
                             @endif
 
+                            <input type="hidden" id="id" value="{{auth()->user()->id}}" name="id">
 
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('nama') ? ' has-danger' : '' }}">
@@ -37,6 +37,26 @@
                                     @if ($errors->has('nama'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('nama') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('nik') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('NIK') }}</label>
+                                        <input class="form-control{{ $errors->has('nik') ? ' is-invalid' : '' }}" placeholder="{{ __('nik') }}" type="text" name="nik" value="{{ old('nik', auth()->user()->nik) }}" required autofocus>
+                                    
+                                    @if ($errors->has('nik'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('nik') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('telp') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Nomor Telepon') }}</label>
+                                        <input class="form-control{{ $errors->has('telp') ? ' is-invalid' : '' }}" placeholder="{{ __('telp') }}" type="text" name="telp" value="{{ old('telp', auth()->user()->telp) }}" required autofocus>
+                                    
+                                    @if ($errors->has('telp'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('telp') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -57,9 +77,8 @@
                             </div>
                         </form>
                         <hr class="my-4" />
-                        <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
-                            @csrf
-                            @method('put')
+                        <form method="post" id="password" autocomplete="off" enctype="multipart/form-data">
+                            {{ csrf_field() }} {{ method_field('POST') }}
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Password') }}</h6>
 
@@ -71,6 +90,7 @@
                                     </button>
                                 </div>
                             @endif
+                            <input type="hidden" id="id" value="{{auth()->user()->id}}" name="id">
 
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
@@ -109,4 +129,96 @@
         </div>
         @include('layouts.footers.nav')
     </div>
+@endsection
+
+@section('script')
+<!-- Sweet Alert jquery-->
+<script src="{{asset('assets')}}/vendor/sweet-alert/sweetalert.min.js" ></script>
+<!-- Validator -->
+<script src="{{ asset('assets') }}/vendor/validator/validator.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#password').validator().on('submit', function (e) {
+        if (!e.isDefaultPrevented()){
+            let id = $('#id').val();
+            url = "{{ url('dashboard/profile/password') . '/' }}" + id;
+
+            $.ajax({
+                url : url,
+                type : "POST",
+                //hanya untuk input data tanpa dokumen
+//                     data : $('#modal-form-users form').serialize(),
+                data: new FormData($("#password")[0]),
+                contentType: false,
+                processData: false,
+                success : function(data) {
+                    console.log(data)
+                    swal({
+                        title: 'Success!',
+                        text: data.message,
+                        type: 'success',
+                        timer: '1500'
+                    })
+                },
+                error : function(data){
+                    console.log(data)
+                    let response = JSON.parse(data.responseText);
+                    let str = ''
+                    $.each(response.errors, function(key, value) {
+                        str += value + ', ';
+                    });
+                    swal({
+                        title: 'Oops...',
+                        text: str,
+                        type: 'error',
+                        timer: '3000'
+                    })
+                }
+            });
+            return false;
+        }
+    });
+
+    $('#update').validator().on('submit', function (e) {
+        if (!e.isDefaultPrevented()){
+            let id = $('#id').val();
+            url = "{{ url('dashboard/profile/data') . '/' }}" + id;
+
+            $.ajax({
+                url : url,
+                type : "POST",
+                //hanya untuk input data tanpa dokumen
+//                     data : $('#modal-form-users form').serialize(),
+                data: new FormData($("#update")[0]),
+                contentType: false,
+                processData: false,
+                success : function(data) {
+                    console.log(data)
+                    swal({
+                        title: 'Success!',
+                        text: data.message,
+                        type: 'success',
+                        timer: '1500'
+                    })
+                },
+                error : function(data){
+                    console.log(data)
+                    let response = JSON.parse(data.responseText);
+                    let str = ''
+                    $.each(response.errors, function(key, value) {
+                        str += value + ', ';
+                    });
+                    swal({
+                        title: 'Oops...',
+                        text: str,
+                        type: 'error',
+                        timer: '3000'
+                    })
+                }
+            });
+            return false;
+        }
+    });
+});
+</script>
 @endsection

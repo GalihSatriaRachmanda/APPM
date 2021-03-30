@@ -31,7 +31,7 @@
                             <div class="form-group{{ $errors->has('nik') ? ' has-danger' : '' }}">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                                     </div>
                                     <input class="form-control{{ $errors->has('nik') ? ' is-invalid' : '' }}" placeholder="{{ __('nik') }}" type="text" name="nik" value="{{ old('nik') }}" required autofocus>
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="form-group{{ $errors->has('telp') ? ' has-danger' : '' }}">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                        <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                                     </div>
                                     <input class="form-control{{ $errors->has('telp') ? ' is-invalid' : '' }}" placeholder="{{ __('telp') }}" type="text" name="telp" value="{{ old('telp') }}" required autofocus>
                                 </div>

@@ -26,8 +26,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth','verified']], fun
 	Route::get('pengaduan/{id}', 'App\Http\Controllers\PengaduanController@show')->name('show.Pengaduan');
 
 	Route::get('profile','App\Http\Controllers\ProfileController@edit')->name('profile.edit');
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+	Route::post('profile/data/{id}','App\Http\Controllers\ProfileController@update');
+	Route::post('profile/password/{id}', 'App\Http\Controllers\ProfileController@password');
 	
 	Route::group(['middleware' => ['role:admin']], function () {
         

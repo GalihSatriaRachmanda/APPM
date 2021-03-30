@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => __('User Profile')] , ['class' => 'bg-gradient-default'])
+@extends('layouts.app', ['title' => __('User Profile')] , ['class' => 'bg-default'])
 
 @section('content')
 <div class="header bg-gradient-primary py-7 mb-7 py-lg-6">
@@ -113,7 +113,16 @@ $(document).ready(function() {
         columns: [
             {data: 'judul', name: 'judul'},
             {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
-            {data: 'status', name: 'status'},
+            {data: 'status',  
+                render: function (data, type, row) {
+                    if(row.status == 'belum di proses'){
+                        return  `<span class="badge badge-danger">${row.status}</span> `;
+                    }else if(row.status == 'proses'){
+                        return  `<span class="badge badge-warning">${row.status}</span> `;
+                    }else if(row.status == 'selesai'){
+                        return  `<span class="badge badge-success">${row.status}</span> `;
+                    }
+            }},
             {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
         ]
     });
@@ -134,7 +143,16 @@ $(document).ready(function() {
             {data: 'judul', name: 'judul'},
             {data: 'tgl_pengaduan', name: 'tgl_pengaduan'},
             {data: 'visible', name: 'visible'},
-            {data: 'status', name: 'status'},
+            {data: 'status',  
+                render: function (data, type, row) {
+                    if(row.status == 'belum di proses'){
+                        return  `<span class="badge badge-danger">${row.status}</span> `;
+                    }else if(row.status == 'proses'){
+                        return  `<span class="badge badge-warning">${row.status}</span> `;
+                    }else if(row.status == 'selesai'){
+                        return  `<span class="badge badge-success">${row.status}</span> `;
+                    }
+            }},
             {data: 'periksa', name: 'periksa', orderable: false, searchable: false}
         ]
     });

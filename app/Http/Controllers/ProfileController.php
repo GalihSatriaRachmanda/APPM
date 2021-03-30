@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
-use App\Http\Requests\PasswordRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -24,15 +24,22 @@ class ProfileController extends Controller
      * @param  \App\Http\Requests\ProfileRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileRequest $request)
+    public function update(Request $request, $id)
     {
-        if (auth()->user()->id == 1) {
-            return back()->withErrors(['not_allow_profile' => __('You are not allowed to change data for a default user.')]);
-        }
+        $user = User::findOrFail($request->id);
 
-        auth()->user()->update($request->all());
+        $input = $request->all();
+        $user->nama             = $input['nama'];
+        $user->nik              = $input['nik'];
+        $user->telp             = $input['telp'];
+        $user->email            = $input['email'];
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        $user->save();
+
+        return response()->json([
+            'success'    => true,
+            'message'    => 'User updated.'
+        ]);
     }
 
     /**
@@ -41,14 +48,18 @@ class ProfileController extends Controller
      * @param  \App\Http\Requests\PasswordRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function password(PasswordRequest $request)
+    public function password(Request $request, $id)
     {
-        if (auth()->user()->id == 1) {
-            return back()->withErrors(['not_allow_password' => __('You are not allowed to change the password for a default user.')]);
-        }
+        $user = User::findOrFail($request->id);
 
-        auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+        $input = $request->all();
+        $user->password = Hash::make($input['password']);
 
-        return back()->withPasswordStatus(__('Password successfully updated.'));
+        $user->save();
+        
+        return response()->json([
+            'success'    => true,
+            'message'    => 'Password updated.'
+        ]);
     }
 }

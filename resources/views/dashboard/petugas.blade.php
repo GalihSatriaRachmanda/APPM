@@ -59,8 +59,8 @@
                                                     <th>Judul</th>
                                                     <th>Nama Pengirim</th>
                                                     <th>Tanggal Laporan</th>
+                                                    <th>Tanggapan Terakhir</th>
                                                     <th>Status</th>
-                                                    <th>Tanggapan Terakhir
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>

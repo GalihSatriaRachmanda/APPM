@@ -29,7 +29,7 @@
                                 <div class="row ">
                                     <div class="col-md-6 col-12">
                                         <div class="form-check">
-                                            <input type="radio" for="status" name="status" class="cb_role form-check-input" id="status1" value="belum di proses">
+                                            <input type="radio" for="status" name="status" class="cb_role form-check-input" id="status1" value="belum di proses" required>
                                             <label class="form-check-label" for="status1">Belum di proses</label>
                                         </div>
                                     </div>

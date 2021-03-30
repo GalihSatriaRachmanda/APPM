@@ -2,8 +2,8 @@
 
 <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('/') }}">
-            <img src="{{ asset('argon') }}/img/brand/white.png" />
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img style="width:200px; height:auto;" src="{{ asset('argon') }}/img/brand/white.png" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
