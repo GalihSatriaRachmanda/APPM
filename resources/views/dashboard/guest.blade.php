@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row justify-content-md-center">
-        <div class="col-xl-3 mb-5 mb-xl-0">
+        <div class="col-xl-3 col-sm-6 mb-5 mb-xl-0">
             <div class="card bg-secondary shadow">
                 <div class="card-body px-lg-2">
                     <div class="container px-lg-5">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 mb-5 mb-xl-0">
+        <div class="col-xl-3 col-sm-6 mb-5 mb-xl-0">
             <div class="card bg-secondary shadow">
                 <div class="card-body px-lg-2">
                     <div class="container px-lg-5">
@@ -30,15 +30,15 @@
                         src="{{ asset('img/assets/process.svg')}}" />
                     </div>
                     <div class="container mt-4 text-center ">
-                        <h1 class="text-lg font-bold">2. Proses Verifikasi</h1>
+                        <h1 class="text-lg font-bold">2. Pengecekan</h1>
                         <p class="text-grey-darker text-sm">
-                        Tunggu sampai laporan Anda di proses.
+                        Tunggu sampai laporan Anda di proses petugas.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 mb-5 mb-xl-0">
+        <div class="col-xl-3 col-sm-6 mb-5 mb-xl-0">
             <div class="card bg-secondary shadow">
                 <div class="card-body px-lg-2">
                     <div class="container px-lg-5">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 mb-5 mb-xl-0">
+        <div class="col-xl-3 col-sm-6 mb-5 mb-xl-0">
             <div class="card bg-secondary shadow">
                 <div class="card-body px-lg-2">
                     <div class="container px-lg-5">

@@ -29,15 +29,15 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="email">Email <small style="color: red;"> *required</small></label>
-                                <input type="email" class="form-control" id="email" name="email" autofocus required>
+                                <label for="telp">Nomor Telepon</label>
+                                <input type="text" value="{{Auth::user()->telp}}" class="form-control" id="telp" name="telp">
                                 <span class="text-danger help-block with-errors"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="telp">Nomor Telepon</label>
-                                <input type="text" value="{{Auth::user()->telp}}" class="form-control" id="telp" name="telp">
+                                <label for="email">Email <small style="color: red;"> *required</small></label>
+                                <input type="email" class="form-control" id="email" name="email" autofocus required>
                                 <span class="text-danger help-block with-errors"></span>
                             </div>
                         </div>

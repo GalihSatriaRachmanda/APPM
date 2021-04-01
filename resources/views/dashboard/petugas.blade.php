@@ -1,6 +1,6 @@
 <div class="container-fluid mt--7 ">
         <div class="row justify-content-md-center">
-            <div class="col-xl-11 mb-5 mb-xl-0">
+            <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
@@ -24,9 +24,9 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <span></span>
                                         <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshTable()" type="button"
-                                            class="btn btn-outline-primary btn-sm" title="Refresh data"><i
-                                            class="fa fa-refresh"></i> Refresh</button>
+                                            <button onclick="refreshTable()" type="button" class="btn btn-outline-primary btn-sm" title="Refresh data">
+                                            <i class="fa fa-refresh"></i> Refresh</button>
+                                            <a href="/dashboard/print-laporan/" id="btn_tanggapan" class="btn btn-outline-primary btn-sm">Eksport PDF</a> 
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -47,9 +47,9 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <span></span>
                                         <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshTable()" type="button"
-                                            class="btn btn-outline-primary btn-sm" title="Refresh data"><i
-                                            class="fa fa-refresh"></i> Refresh</button>
+                                            <button onclick="refreshTable()" type="button" class="btn btn-outline-primary btn-sm" title="Refresh data">
+                                            <i class="fa fa-refresh"></i> Refresh</button>
+                                            <a href="/dashboard/print-laporan/" id="btn_tanggapan" class="btn btn-outline-primary btn-sm">Eksport PDF</a> 
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -71,9 +71,10 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <span></span>
                                         <div class="btn-group btn-group-md mb-3">
-                                            <button onclick="refreshTable()" type="button"
-                                            class="btn btn-outline-primary btn-sm" title="Refresh data"><i
-                                            class="fa fa-refresh"></i> Refresh</button>
+                                            <button onclick="refreshTable()" type="button" class="btn btn-outline-primary btn-sm" title="Refresh data">
+                                            <i class="fa fa-refresh"></i> Refresh</button>
+                                            <a href="/dashboard/print-laporan/" id="btn_tanggapan" class="btn btn-outline-primary btn-sm">Eksport PDF</a> 
+
                                         </div>
                                     </div>
                                     <div class="table-responsive">

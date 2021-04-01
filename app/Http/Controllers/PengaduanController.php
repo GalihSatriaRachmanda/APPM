@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use Str;
+use PDF;
 
 class PengaduanController extends Controller
 {
@@ -150,5 +151,21 @@ class PengaduanController extends Controller
                 return $user->tgl_pengaduan ? with(new Carbon($user->tgl_pengaduan))->isoFormat('D MMMM Y HH:mm') : '';
             })
             ->rawColumns(['periksa'])->make(true);
+    }
+
+    public function cetak_laporan($id)
+    {
+        $pengaduan = Pengaduan::where('id', $id)->first();
+ 
+    	$pdf = PDF::loadview('cetak.cetak', ['pengaduan' => $pengaduan]);
+    	return $pdf->download('laporan-pdf');
+    }
+
+    public function cetak_list_laporan()
+    {
+        $pengaduan = Pengaduan::all();
+ 
+    	$pdf = PDF::loadview('cetak.cetak_list', ['pengaduan' => $pengaduan]);
+    	return $pdf->download('list-laporan-pdf');
     }
 }

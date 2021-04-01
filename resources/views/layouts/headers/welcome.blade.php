@@ -9,7 +9,7 @@
     </div>
     @endif
     <div class="container">
-        <div class="header-body text-center mb-3">
+        <div class="header-body mt-2 text-center mb-3">
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-md-6">
                     <h1 class="text-white">{{ __('Layanan Pelaporan Pengaduan Online Masyarakat') }}</h1>

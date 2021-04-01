@@ -69,7 +69,7 @@
                             <div class="row justify-content-center">
                                 <h2 class="text-primary">{{ __('Tanggapan :') }}</h2>
                             </div>
-                            @if(!empty($tanggapan))
+                            @if(!$tanggapan->isEmpty())
                                 @foreach($tanggapan as $a)
                                 <div class="row justify-content-left">
                                     <a class="text text-default "><span class="h4 text text-muted">{{\Carbon\Carbon::parse($a->tgl_tanggapan)->isoFormat('D MMMM Y HH:mm')}}  :  </span>{!!nl2br(str_replace(" ", " &nbsp;", $a->tanggapan))!!}</a>
@@ -84,8 +84,13 @@
                     </div>
                 </div>
                 @hasanyrole('petugas|admin')
+                @if($pengaduan->status != 'selesai' )
                 <div class="row justify-content-center">
                     <a onclick="tanggapanForm()" id="btn_tanggapan" class="btn btn-info btn-small btn-circle mt-3 text-white">Tanggapi</a> 
+                </div>
+                @endif
+                <div class="row justify-content-center">
+                    <a href="/dashboard/print-laporan/{{$pengaduan->id}}" id="btn_tanggapan" class="btn btn-info btn-small btn-circle mt-3 text-white">Eksport PDF</a> 
                 </div>
                 @endhasanyrole
             </div>

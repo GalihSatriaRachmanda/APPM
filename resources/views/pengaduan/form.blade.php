@@ -22,6 +22,7 @@
                                 <span class="text-danger help-block with-errors"></span>
                             </div>
                         </div>
+                        @if($pengaduan->status == "proses")
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Status</label>
@@ -29,13 +30,7 @@
                                 <div class="row ">
                                     <div class="col-md-6 col-12">
                                         <div class="form-check">
-                                            <input type="radio" for="status" name="status" class="cb_role form-check-input" id="status1" value="belum di proses" required>
-                                            <label class="form-check-label" for="status1">Belum di proses</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-check">
-                                            <input type="radio" for="status" name="status" class="cb_role form-check-input" id="status2" value="proses">
+                                            <input type="radio" for="status" name="status" class="cb_role form-check-input" checked="" id="status2" value="proses">
                                             <label class="form-check-label" for="status2">Proses</label>
                                         </div>
                                     </div>
@@ -48,11 +43,14 @@
                                 </div>
                             </div>
                         </div>
+                        @else
+                        <input type="hidden" name="status" id="status" value="proses">
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Proses</button>
                 </div>
 
             </form>
@@ -86,7 +84,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Proses</button>
                 </div>
             </form>
         </div>
