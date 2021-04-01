@@ -158,7 +158,7 @@ class PengaduanController extends Controller
         $pengaduan = Pengaduan::where('id', $id)->first();
  
     	$pdf = PDF::loadview('cetak.cetak', ['pengaduan' => $pengaduan]);
-    	return $pdf->download('laporan-pdf');
+    	return $pdf->download('laporan.pdf');
     }
 
     public function cetak_list_laporan()
@@ -166,6 +166,6 @@ class PengaduanController extends Controller
         $pengaduan = Pengaduan::all();
  
     	$pdf = PDF::loadview('cetak.cetak_list', ['pengaduan' => $pengaduan]);
-    	return $pdf->download('list-laporan-pdf');
+    	return $pdf->download('list-laporan.pdf');
     }
 }
